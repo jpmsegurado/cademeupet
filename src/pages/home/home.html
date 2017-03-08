@@ -1,12 +1,12 @@
-<ion-header>
+<ion-header no-border >
   <ion-navbar>
     <ion-title>
       Cadê meu pet?
     </ion-title>
 
     <ion-buttons end>
-      <button ion-button icon-only>
-        <ion-icon name="cog"></ion-icon>
+      <button ion-button icon-only (click)="goToConfig()">
+        <ion-icon name="person"></ion-icon>
       </button>
     </ion-buttons>
 
@@ -15,16 +15,21 @@
 
 <ion-content>
 
-  <ion-list>
+  <ion-tabs tabsPlacement="top" class="my-tabs">
+    <ion-tab [root]="tab1Root" [rootParams]="navCtrl" tabTitle="Pets encontrados"></ion-tab>
+    <ion-tab [root]="tab2Root" [rootParams]="navCtrl" tabTitle="Pets perdidos"></ion-tab>
+  </ion-tabs>
 
-    <ion-card *ngFor="let found of founds">
+  <!--<ion-list>
+
+    <ion-card *ngFor="let found of founds" (click)="openFoundPet(found)">
       <img [src]="found.photo + '-/resize/300x/'"/>
       <ion-card-content>
         <ion-card-title>
-          Chanão
+          {{found.name}}
           </ion-card-title>
         <p>
-          Gato persa muito dócil de pêlo laranja e branco. Bastante dócil, atende por chanão.
+          {{found.description}}
         </p>
       </ion-card-content>
     </ion-card>
@@ -39,6 +44,6 @@
       <button ion-button>Achei um pet</button>
       <button ion-button>Perdi meu pet</button>
     </ion-fab-list>
-  </ion-fab>
+  </ion-fab>-->
  
 </ion-content>

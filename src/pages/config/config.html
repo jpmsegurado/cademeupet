@@ -7,12 +7,39 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>config</ion-title>
+    <ion-title>Configurações</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+  <ion-item-divider color="light">Perfil</ion-item-divider>
+  <ion-item>
+    <ion-icon name="person" item-left></ion-icon>
+    <h2>{{user.nome}}</h2>
+  </ion-item>
+  <ion-item>
+    <ion-icon name="mail" item-left></ion-icon>
+    <h2>{{user.email}}</h2>
+  </ion-item>
+
+  <ion-item-divider color="light">Preferências</ion-item-divider>
+  <div *ngIf="!!user.address_string">
+    <ion-item>
+      <h2>Endereço</h2>
+      <p>{{user.address_string}}</p>
+    </ion-item>
+
+    <div padding>
+      <button full ion-button (click)="loadMap()">Atualizar endereço</button>
+    </div>
+  </div>
+
+  <div padding *ngIf="!user.address_string">
+    <button full ion-button (click)="loadMap()">Informar endereço</button>
+    <p color="dark">Ao informar seu endereço, sempre que um novo pet for encontrado próximo a você, chegará uma notificação.</p>
+  </div>
 
 </ion-content>

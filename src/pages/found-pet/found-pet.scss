@@ -1,0 +1,23 @@
+page-found-pet {
+    .recipe_cover {
+        background-size: cover;
+        background-position: center;
+        position: relative;
+
+        .overlay {
+            display: flex;
+            align-items: flex-end;
+            height:200px;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        h2 {
+            color: color($colors, white);
+            margin: 0 76px 10px 20px;
+            overflow: hidden;
+            will-change: opacity;
+            transition: opacity .3s;
+        }
+  }
+}

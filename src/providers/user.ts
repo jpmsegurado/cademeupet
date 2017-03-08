@@ -12,7 +12,7 @@ export class User {
   }
 
   currentUser() {
-    return parse.User.current();
+    return parse.User.current().toJSON();
   }
 
   logIn(username, password) {
@@ -28,6 +28,13 @@ export class User {
 
     return user.signUp();
 
+  }
+
+  updateAddress(address, lat, lng) {
+    let user = parse.User.current();
+    user.set('address_string', address);
+    user.set('address_point', new parse.GeoPoint({ latitude: lat, longitude: lng }));
+    return user.save();
   }
 
 }

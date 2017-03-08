@@ -5,9 +5,16 @@ import { HomePage } from '../pages/home/home';
 import { ConfigPage } from '../pages/config/config';
 import { RegisterPage } from '../pages/register/register';
 import { LoginPage } from '../pages/login/login';
+import { MapPage } from '../pages/map/map';
+import { FoundPetPage } from '../pages/found-pet/found-pet';
+import { FoundPetsPage } from '../pages/found-pets/found-pets';
+import { LostPetPage } from '../pages/lost-pet/lost-pet';
+import { LostPetsPage } from '../pages/lost-pets/lost-pets';
 
 import { FoundPet } from '../providers/found-pet';
+import { LostPet } from '../providers/lost-pet';
 import { User } from '../providers/user';
+import { Alert } from '../providers/alert';
 
 @NgModule({
   declarations: [
@@ -15,7 +22,12 @@ import { User } from '../providers/user';
     HomePage,
     ConfigPage,
     RegisterPage,
-    LoginPage
+    LoginPage,
+    MapPage,
+    FoundPetPage,
+    FoundPetsPage,
+    LostPetPage,
+    LostPetsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -26,12 +38,18 @@ import { User } from '../providers/user';
     HomePage,
     ConfigPage,
     RegisterPage,
-    LoginPage
+    LoginPage,
+    MapPage,
+    FoundPetPage,
+    FoundPetsPage,
+    LostPetPage,
+    LostPetsPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FoundPet,
-    User
+    User,
+    Alert
   ]
 })
 export class AppModule {}

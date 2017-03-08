@@ -1,0 +1,28 @@
+<ion-content>
+
+    <ion-list>
+        <ion-card *ngFor="let found of founds" (click)="openFoundPet(found)">
+        <img [src]="found.photo + '-/resize/300x/'"/>
+        <ion-card-content>
+            <ion-card-title>
+            {{found.name}}
+            </ion-card-title>
+            <p>
+            {{found.description}}
+            </p>
+        </ion-card-content>
+        </ion-card>
+        
+    </ion-list>
+
+    <ion-fab bottom right >
+        <button ion-fab>
+        <ion-icon name="add"></ion-icon>
+        </button>
+        <ion-fab-list side="left">
+        <button ion-button>Achei um pet</button>
+        <button ion-button>Perdi meu pet</button>
+        </ion-fab-list>
+    </ion-fab>
+
+</ion-content>
