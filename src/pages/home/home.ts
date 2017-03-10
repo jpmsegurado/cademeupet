@@ -6,6 +6,9 @@ import { ConfigPage } from '../config/config';
 import { FoundPetPage } from '../found-pet/found-pet';
 import { FoundPetsPage } from '../found-pets/found-pets';
 import { LostPetsPage } from '../lost-pets/lost-pets';
+import { NewPetPage } from '../new-pet/new-pet';
+import { Geolocation } from 'ionic-native';
+
 
 @Component({
   selector: 'page-home',
@@ -18,24 +21,19 @@ export class HomePage {
   public tab2Root = LostPetsPage;
 
   constructor(
-    public navCtrl: NavController,
-    public foundService: FoundPet
+    public navCtrl: NavController
   ) {
     
   }
 
-  ionViewDidEnter() {
-    this.foundService.getAll(-40, 30).then((res) => {
-      this.founds = res; 
-    })
+  openNewPetPage(type) { 
+    this.navCtrl.push(NewPetPage, { type });
   }
+
 
   goToConfig() {
     this.navCtrl.push(ConfigPage);
   }
 
-  openFoundPet(pet) {
-    this.navCtrl.push(FoundPetPage, { pet: pet });
-  }
 
 }

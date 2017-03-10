@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FoundPet } from '../../providers/found-pet';
 import { FoundPetPage } from '../found-pet/found-pet';
+import { Geolocation } from 'ionic-native';
 
 
 @Component({
@@ -15,15 +16,35 @@ export class FoundPetsPage {
 
   constructor(
     public navParams: NavParams,
-    public foundService: FoundPet
+    public foundService: FoundPet,
+    public loadCtrl: LoadingController
   ) {
     this.navCtrl = navParams.data;
   }
 
   ionViewDidLoad() {
-    this.foundService.getAll(-40, 30).then((res) => {
-      this.founds = res; 
+    this.load();
+  }
+
+  load(refresher?) {
+
+    let loader;
+    if(!refresher) {
+      loader = this.loadCtrl.create({
+        content: 'Carregando...'
+      });
+      loader.present();
+    }
+
+    Geolocation.getCurrentPosition().then((resp: any) => {
+      console.log(resp);
+      this.foundService.getAll(resp.coords.latitude, resp.coords.longitude).then((res) => {
+        this.founds = res; 
+        !!loader && loader.dismiss();
+        !!refresher && refresher.complete();
+      });
     })
+    
   }
 
   openFoundPet(pet) {

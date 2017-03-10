@@ -27,13 +27,10 @@ export class ConfigPage {
     public modal: ModalController,
     public alertService: Alert,
     public loadCtrl: LoadingController
-  ) {}
-
-  
-
-  ionViewDidEnter() {
+  ) {
     this.user = this.userService.currentUser();
   }
+
 
   loadMap() {
     this.navCtrl.push(MapPage, 

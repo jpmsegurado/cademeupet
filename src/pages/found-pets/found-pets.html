@@ -1,28 +1,28 @@
 <ion-content>
 
+    <ion-refresher (ionRefresh)="load($event)">
+        <ion-refresher-content
+        pullingIcon="arrow-dropdown" 
+        pullingText="Puxe para atualizar"
+        refreshingSpinner="circles"
+        refreshingText="Atualizando...">
+        </ion-refresher-content>
+    </ion-refresher>
+
     <ion-list>
+          
         <ion-card *ngFor="let found of founds" (click)="openFoundPet(found)">
-        <img [src]="found.photo + '-/resize/300x/'"/>
-        <ion-card-content>
-            <ion-card-title>
-            {{found.name}}
-            </ion-card-title>
-            <p>
-            {{found.description}}
-            </p>
-        </ion-card-content>
+            <div class="img-wrapper">
+                <img [src]="found.photo + '-/resize/300x/'"/>
+            </div>
+            <ion-card-content>
+                <h2>
+                {{found.description}}
+                </h2>
+                <p>{{found.trueDistance}} km de distância</p>
+            </ion-card-content>
         </ion-card>
         
     </ion-list>
-
-    <ion-fab bottom right >
-        <button ion-fab>
-        <ion-icon name="add"></ion-icon>
-        </button>
-        <ion-fab-list side="left">
-        <button ion-button>Achei um pet</button>
-        <button ion-button>Perdi meu pet</button>
-        </ion-fab-list>
-    </ion-fab>
 
 </ion-content>

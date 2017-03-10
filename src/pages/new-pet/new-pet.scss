@@ -1,0 +1,24 @@
+page-new-pet {
+    p {
+        color: color($colors, gray);
+        text-align: justify;
+    }
+
+    .pick-image { 
+        display: block;
+
+        ion-icon {
+            margin-top: 20px;
+            color: color($colors, gray);
+            font-size: 11rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        p {
+            width: 100%;
+            text-align: center;
+        }
+
+    }
+}

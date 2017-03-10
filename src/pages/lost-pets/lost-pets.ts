@@ -1,22 +1,54 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { LostPet } from '../../providers/lost-pet';
+import { LostPetPage } from '../lost-pet/lost-pet';
+import { Geolocation } from 'ionic-native';
 
-/*
-  Generated class for the LostPets page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
-  selector: 'page-lost-pets',
+  selector: 'page-found-pets',
   templateUrl: 'lost-pets.html'
 })
 export class LostPetsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  public losts: any = [];
+  public navCtrl: any;
+
+  constructor(
+    public navParams: NavParams,
+    public lostService: LostPet,
+    public loadCtrl: LoadingController
+  ) {
+    this.navCtrl = navParams.data;
+  }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LostPetsPage');
+    this.load();
+  }
+
+  load(refresher?) {
+
+    let loader;
+    if(!refresher) {
+      loader = this.loadCtrl.create({
+        content: 'Carregando...'
+      });
+      loader.present();
+    }
+
+    Geolocation.getCurrentPosition().then((resp: any) => {
+      console.log(resp);
+      this.lostService.getAll(resp.coords.latitude, resp.coords.longitude).then((res) => {
+        this.losts = res; 
+        !!loader && loader.dismiss();
+        !!refresher && refresher.complete();
+      });
+    })
+
+  }
+
+  openLostPet(pet) {
+    this.navCtrl.push(LostPetPage, { pet: pet });
   }
 
 }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MapPage } from '../map/map';
+
 
 /*
   Generated class for the FoundPet page.
@@ -27,6 +29,14 @@ export class FoundPetPage {
 
   getPhoto(pet) {
     return this.sanitizer.bypassSecurityTrustStyle(`url('${pet.photo}-/resize/500x/')`);
+  }
+
+  openMap(pet) {
+    this.navCtrl.push(MapPage, 
+    {
+      title: 'Local do pet',
+      info: 'Pet encontrado aqui'
+    }); 
   }
 
 

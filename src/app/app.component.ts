@@ -4,6 +4,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
+import { NewPetPage } from '../pages/new-pet/new-pet';
 
 import { User } from '../providers/user';
 
@@ -26,6 +27,7 @@ export class MyApp {
       Splashscreen.hide();
 
       this.rootPage = userService.isLogged() ? HomePage : LoginPage;
+      // this.rootPage = NewPetPage;
 
     });
   }

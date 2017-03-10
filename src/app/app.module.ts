@@ -10,11 +10,13 @@ import { FoundPetPage } from '../pages/found-pet/found-pet';
 import { FoundPetsPage } from '../pages/found-pets/found-pets';
 import { LostPetPage } from '../pages/lost-pet/lost-pet';
 import { LostPetsPage } from '../pages/lost-pets/lost-pets';
+import { NewPetPage } from '../pages/new-pet/new-pet';
 
 import { FoundPet } from '../providers/found-pet';
 import { LostPet } from '../providers/lost-pet';
 import { User } from '../providers/user';
 import { Alert } from '../providers/alert';
+import { File } from '../providers/file';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { Alert } from '../providers/alert';
     FoundPetPage,
     FoundPetsPage,
     LostPetPage,
-    LostPetsPage
+    LostPetsPage,
+    NewPetPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -43,13 +46,16 @@ import { Alert } from '../providers/alert';
     FoundPetPage,
     FoundPetsPage,
     LostPetPage,
-    LostPetsPage
+    LostPetsPage,
+    NewPetPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FoundPet,
+    LostPet,
     User,
-    Alert
+    Alert,
+    File
   ]
 })
 export class AppModule {}

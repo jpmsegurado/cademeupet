@@ -20,4 +20,10 @@ page-found-pet {
             transition: opacity .3s;
         }
   }
+
+  ion-item {
+      ion-label {
+          white-space: normal;
+      }
+  }
 }

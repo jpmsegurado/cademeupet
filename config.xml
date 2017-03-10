@@ -8,6 +8,7 @@
   <allow-navigation href="http://ionic.local/*"/>
   <allow-navigation href="http://192.168.0.13:8100"/>
   <allow-navigation href="http://192.168.0.24:8100"/>
+  <allow-navigation href="http://192.168.0.40:8100"/>
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
   <allow-intent href="tel:*"/>
@@ -30,6 +31,7 @@
   <preference name="SplashMaintainAspectRatio" value="true"/>
   <preference name="FadeSplashScreenDuration" value="300"/>
   <preference name="SplashShowOnlyFirstTime" value="false"/>
+  <preference name="loadUrlTimeoutValue" value="700000"/>
   <feature name="StatusBar">
     <param name="ios-package" onload="true" value="CDVStatusBar"/>
   </feature>
@@ -43,4 +45,6 @@
     <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCgVB8nM-qp12aoXt4dHrtkirbnKm6CAS0"/>
   </plugin>
   <plugin name="cordova-plugin-geolocation" spec="~2.4.1"/>
+  <plugin name="cordova-plugin-camera" spec="~2.4.0"/>
+  <plugin name="cordova-plugin-file-transfer" spec="~1.6.2"/>
 </widget>

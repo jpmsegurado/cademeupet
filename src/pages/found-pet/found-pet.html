@@ -21,7 +21,28 @@
     </div>
   </div>
   <div class="recipe_details">
-    
+    <ion-list>
+ 
+      <ion-item>
+        <ion-icon name="paw" item-left></ion-icon>
+        <ion-label>Gato</ion-label>
+      </ion-item>
+
+      <ion-item> 
+        <ion-icon name="information-circle" item-left></ion-icon>
+        <ion-label>{{pet.description}}</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="pin" item-left></ion-icon>
+        <ion-label>{{pet.location_description}}</ion-label>
+      </ion-item>  
+
+      <div padding> 
+        <button full ion-button (click)="openMap(pet)">Ver localização no mapa</button>
+      </div>
+
+    </ion-list>
   </div>
 
 </ion-content>

@@ -1,0 +1,63 @@
+<!--
+  Generated template for the NewPet page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{type === 'lost' ? 'Novo pet perdido' : 'Novo pet encontrado'}}</ion-title>
+    <ion-buttons end>
+      <button ion-button [disabled]="loading" icon-right (click)="add(type, form, location, locationStr, src)">
+        Enviar
+        <ion-icon name="checkmark" *ngIf="!loading"></ion-icon>
+        <ion-spinner item-right *ngIf="!!loading"></ion-spinner>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list>
+
+    <div class="pick-image" (click)="pickImage()" *ngIf="src.length === 0">
+      <ion-icon name="image"></ion-icon>
+      <p>
+        Escolha uma foto
+      </p>
+    </div>
+
+    <div *ngIf="src.length > 0" class="img">
+      <img [src]="src" (click)="pickImage()">
+    </div> 
+
+    <form [formGroup]="form" (submit)="add(type, form, location, locationStr, src)">
+      <ion-item *ngIf="type === 'lost'">
+        <ion-label>Nome do pet</ion-label>
+        <ion-input formControlName="name" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Descrição</ion-label>
+        <ion-textarea formControlName="description"></ion-textarea>
+      </ion-item>
+    </form>
+
+    <ion-item *ngIf="!!location">
+      <ion-label>Endereço</ion-label>
+      <ion-input [(ngModel)]="locationStr" readonly></ion-input>
+    </ion-item>
+
+    <div padding *ngIf="!location">
+      <button full ion-button (click)="openMap(type)">{{type === 'found' ? 'Mostre onde encontrou o pet' : 'Mostre onde perdeu o pet'}}</button>
+      <p *ngIf="type === 'found'">Ao informar a localização, os usuários que adicionaram pets perdidos nas proximidades serão notificados</p> 
+      <p *ngIf="type !== 'found'">Ao informar a localização, sempre que um pet for encontrado nas proximidades, você receberá uma notificação.</p> 
+    </div>
+
+  </ion-list>
+
+</ion-content>

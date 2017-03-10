@@ -20,6 +20,7 @@ export class MapPage {
   public coords: any;
   public loading: Boolean = false;
   public callback: any;
+  public info: any;
 
   constructor(
     public navCtrl: NavController, 
@@ -29,10 +30,11 @@ export class MapPage {
     this.title = navParams.get('title');
     this.msg = navParams.get('msg');
     this.callback = navParams.get('callback');
+    this.info = navParams.get('info');
   }
 
   ionViewDidLoad() {
-    this.alertService.showBasicToast(this.msg);
+    !!this.msg && this.alertService.showBasicToast(this.msg);
     Geolocation.getCurrentPosition().then((resp) => {
       this.loadMap(resp.coords);
     });
@@ -48,9 +50,9 @@ export class MapPage {
     // listen to MAP_READY event
     this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
 
-      this.addMarker(coords.latitude, coords.longitude, 'Sua localização');
+      this.addMarker(coords.latitude, coords.longitude, this.info || 'Sua localização');
 
-      this.map.on('click').subscribe((res) => {
+      !!this.callback && this.map.on('click').subscribe((res) => {
         this.addMarker(res.lat, res.lng, 'Clique aqui para confirmar');
       });
 
@@ -68,8 +70,10 @@ export class MapPage {
     this.map.addMarker(markerOptions).then((marker: GoogleMapsMarker) => {
         marker.showInfoWindow();
         marker.on('info_click').subscribe(() => {
-          this.callback(lat, lng);
-          this.navCtrl.pop();
+          if(!!this.callback) {
+            this.callback(lat, lng);
+            this.navCtrl.pop();
+          }
         });
     });
 
