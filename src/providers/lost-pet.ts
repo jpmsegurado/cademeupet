@@ -44,7 +44,7 @@ export class LostPet {
     return query.find().then((res) => {
       return res.map((item) => {
         const parsed = item.toJSON();
-        parsed.trueDistance = this.getDistanceFromLatLonInKm(lat - 1, long, item.toJSON().location.latitude, item.toJSON().location.longitude);
+        parsed.trueDistance = this.getDistanceFromLatLonInKm(lat, long, item.toJSON().location.latitude, item.toJSON().location.longitude);
         return parsed;
       });
     });

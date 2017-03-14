@@ -17,6 +17,7 @@ import { LostPet } from '../providers/lost-pet';
 import { User } from '../providers/user';
 import { Alert } from '../providers/alert';
 import { File } from '../providers/file';
+import { Storage } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { File } from '../providers/file';
     LostPet,
     User,
     Alert,
-    File
+    File,
+    Storage
   ]
 })
 export class AppModule {}

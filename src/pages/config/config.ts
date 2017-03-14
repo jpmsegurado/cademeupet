@@ -4,6 +4,7 @@ import { User } from '../../providers/user';
 import { MapPage } from '../map/map';
 import { Geocoder } from 'ionic-native';
 import { Alert } from '../../providers/alert';
+import { LoginPage } from '../login/login';
 
 
 /*
@@ -18,7 +19,7 @@ import { Alert } from '../../providers/alert';
 })
 export class ConfigPage {
 
-  public user: any = {};
+  public user: any;
 
   constructor(
     public navCtrl: NavController, 
@@ -60,6 +61,10 @@ export class ConfigPage {
 
       }
     }); 
+  }
+
+  goToLogin() {
+    this.navCtrl.setRoot(LoginPage, null, { animate: true });
   }
 
 }

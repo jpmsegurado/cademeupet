@@ -73,7 +73,7 @@ export class NewPetPage {
         loader.present();
 
         promise.then(() => {
-          this.alertService.showBasicAlert('Enviado com sucesso', () => this.navCtrl.pop());
+          // this.alertService.showBasicAlert('Enviado com sucesso', () => this.navCtrl.pop());
           loader.dismiss();
         });
 

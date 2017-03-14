@@ -37,6 +37,20 @@ export class FoundPet {
   }
  
   getAll(lat, long) {
+
+    // var poin = new parse.GeoPoint({ latitude: lat, longitude: long }); 
+    // var quer = new parse.Query('LostPet');
+    // quer.withinKilometers('location', poin, 25);
+    // quer.find({
+    //   success: function(res){
+    //     console.log(res)
+    //   },
+    //   error: function(err) {
+    //     console.log(err.message);
+    //   }
+    // });
+
+
     let point = new parse.GeoPoint({ latitude: lat, longitude: long }); 
     let query = new parse.Query('FoundPet');
     query.withinKilometers('location', point, 25);

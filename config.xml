@@ -9,6 +9,8 @@
   <allow-navigation href="http://192.168.0.13:8100"/>
   <allow-navigation href="http://192.168.0.24:8100"/>
   <allow-navigation href="http://192.168.0.40:8100"/>
+  <allow-navigation href="http://192.168.0.32:8100"/>
+  <allow-navigation href="http://192.168.6.180:8100"/>
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
   <allow-intent href="tel:*"/>
@@ -41,10 +43,11 @@
   <plugin name="cordova-plugin-statusbar" spec="2.2.1"/>
   <plugin name="cordova-plugin-device" spec="1.1.4"/>
   <plugin name="cordova-plugin-splashscreen" spec="~4.0.1"/>
-  <plugin name="cordova-plugin-googlemaps" spec="~1.4.0">
-    <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCgVB8nM-qp12aoXt4dHrtkirbnKm6CAS0"/>
-  </plugin>
   <plugin name="cordova-plugin-geolocation" spec="~2.4.1"/>
   <plugin name="cordova-plugin-camera" spec="~2.4.0"/>
   <plugin name="cordova-plugin-file-transfer" spec="~1.6.2"/>
+  <plugin name="onesignal-cordova-plugin" spec="~2.0.11"/>
+  <plugin name="cordova-plugin-googlemaps" spec="~1.4.0">
+    <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCgVB8nM-qp12aoXt4dHrtkirbnKm6CAS0"/>
+  </plugin>
 </widget>

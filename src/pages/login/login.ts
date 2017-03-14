@@ -47,6 +47,11 @@ export class LoginPage {
     }
   }
 
+  pular() {
+    this.navCtrl.setRoot(HomePage, null, { animate: true });
+    this.userService.setLogged();
+  }
+
 
   register() {
     this.navCtrl.push(RegisterPage);

@@ -40,9 +40,20 @@
   </form>
 
   <div padding>
-    <button ion-button full clear (click)="register()" [disabled]="loadingNormal">
-      Criar uma conta
-    </button>
+    <ion-row>
+      <ion-col>
+        <button ion-button full clear (click)="register()" [disabled]="loadingNormal">
+          Criar uma conta
+        </button>
+      </ion-col>
+
+      <ion-col>
+        <button ion-button full clear (click)="pular()" [disabled]="loadingNormal">
+          Pular
+        </button>
+      </ion-col>
+
+    </ion-row>
   </div>
 
 </ion-content>
