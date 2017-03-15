@@ -11,6 +11,7 @@ import { FoundPetsPage } from '../pages/found-pets/found-pets';
 import { LostPetPage } from '../pages/lost-pet/lost-pet';
 import { LostPetsPage } from '../pages/lost-pets/lost-pets';
 import { NewPetPage } from '../pages/new-pet/new-pet';
+import { PetsAddedPage } from '../pages/pets-added/pets-added';
 
 import { FoundPet } from '../providers/found-pet';
 import { LostPet } from '../providers/lost-pet';
@@ -31,7 +32,8 @@ import { Storage } from '@ionic/storage';
     FoundPetsPage,
     LostPetPage,
     LostPetsPage,
-    NewPetPage
+    NewPetPage,
+    PetsAddedPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -48,7 +50,8 @@ import { Storage } from '@ionic/storage';
     FoundPetsPage,
     LostPetPage,
     LostPetsPage,
-    NewPetPage
+    NewPetPage,
+    PetsAddedPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

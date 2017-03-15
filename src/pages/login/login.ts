@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Facebook } from 'ionic-native';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../providers/user';
 import { HomePage } from '../home/home';
@@ -19,6 +20,7 @@ export class LoginPage {
 
   public form: any;
   public loadingNormal: any = false;
+  public loadingFacebook: any = false;
 
   constructor(
     public navCtrl: NavController, 
@@ -45,6 +47,19 @@ export class LoginPage {
 
       });
     }
+  }
+
+  fb() {
+    this.loadingFacebook = true;
+    Facebook.login(['public_profile', 'user_birthday', 'email']).then((result) => {
+      Facebook.api('me/?fields=id,email,name', ['public_profile', 'email']).then((response) => {
+        this.userService.facebookLogin(result, response).then(() => {
+          this.navCtrl.setRoot(HomePage, null, { animate: true });
+        });
+      });
+    }, () => {
+      this.loadingFacebook = false;
+    });
   }
 
   pular() {

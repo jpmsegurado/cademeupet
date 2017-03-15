@@ -28,6 +28,8 @@ export class LostPet {
       if(!!url) newFound.set('photo', url);
       newFound.set('description', pet.description);
       newFound.set('name', pet.name);
+      newFound.set('tipo', pet.tipo);
+      newFound.set('idade', parseInt(pet.idade));
       newFound.set('location', point);
       newFound.set('location_description', locationStr);
       newFound.set('user', parse.User.current());
@@ -41,6 +43,8 @@ export class LostPet {
     let point = new parse.GeoPoint({ latitude: lat, longitude: long }); 
     let query = new parse.Query('LostPet');
     query.withinKilometers('location', point, 25);
+    query.descending('createdAt');
+    query.include('user');
     return query.find().then((res) => {
       return res.map((item) => {
         const parsed = item.toJSON();

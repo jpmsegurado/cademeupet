@@ -1,3 +1,9 @@
 page-home {
+    .tab-button[aria-selected=true] .tab-button-text{
+        transform: none !important;
+    }
 
+    ion-fab-list {
+        right: 0px;
+    }
 }

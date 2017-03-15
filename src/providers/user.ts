@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import parse from './parse';
 import { OneSignal } from 'ionic-native';
 import { Storage } from '@ionic/storage';
+import moment from 'moment';
 
 
 @Injectable()
@@ -14,18 +15,12 @@ export class User {
   isLogged() {
 
     return this.storage.get('logged').then((logged) => {
-      if(logged) return true;
+      if(!!logged) return true;
       
       const isLogged = !!parse.User.current();
       if(!!isLogged) {
         this.startOneSignal();
       }
-
-      let object = {
-        location: { latitude: -16.6494498, longitude: -49.2247317 }
-      };
-
-      parse.Cloud.run('bla', object).then(console.log);
 
       return isLogged;
     });
@@ -34,6 +29,26 @@ export class User {
 
   setLogged() {
     return this.storage.set('logged', true);
+  }
+
+  updateTelefone(tel) {
+    let user = parse.User.current();
+    user.set('phone', tel);
+    return user.save();
+  }
+
+  facebookLogin(result, response) {
+    let expire = moment().add(result.authResponse.expiresIn, 'ms').format("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+    return parse.FacebookUtils.logIn({
+      "id": result.authResponse.userID,
+      "access_token": result.authResponse.accessToken,
+      "expiration_date": expire
+    }, {}).then((res) => {
+        let user = parse.User.current();
+        user.set('nome', response.name);
+        user.set('email', response.email);
+        return user.save();
+    });
   }
 
   currentUser() {
@@ -67,18 +82,20 @@ export class User {
   }
 
   startOneSignal() {
-    console.log('OneSignal started');
-    OneSignal.startInit('11ccaccc-f923-4474-b1e8-c4b3b6dfa1da', '1089022243588');
-    OneSignal.handleNotificationReceived().subscribe((data) => {
-      console.log(data);
-    });
-    OneSignal.endInit();
+    if(window['cordova']) {
+      console.log('OneSignal started');
+      OneSignal.startInit('11ccaccc-f923-4474-b1e8-c4b3b6dfa1da', '1089022243588');
+      OneSignal.handleNotificationReceived().subscribe((data) => {
+        console.log(data);
+      });
+      OneSignal.endInit();
 
-    OneSignal.getIds().then((data) => {
-      let user = parse.User.current();
-      user.set('player_id', data.userId);
-      user.save();
-    });
+      OneSignal.getIds().then((data) => {
+        let user = parse.User.current();
+        user.set('player_id', data.userId);
+        user.save();
+      });
+    }
   }
 
 }

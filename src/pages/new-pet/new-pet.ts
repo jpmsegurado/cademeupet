@@ -2,12 +2,15 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MapPage } from '../map/map';
+import { LoginPage } from '../login/login';
+import { ConfigPage } from '../config/config';
 import { Geocoder } from 'ionic-native';
 import { User } from '../../providers/user';
 import { File } from '../../providers/file';
 import { Alert } from '../../providers/alert';
 import { FoundPet } from '../../providers/found-pet';
 import { LostPet } from '../../providers/lost-pet';
+import Config from '../../providers/config';
 
 /*
   Generated class for the NewPet page.
@@ -26,6 +29,7 @@ export class NewPetPage {
   public location: any;
   public locationStr: any;
   public src: any = '';
+  public tipos = Config.tipos;
 
   constructor(
     public navCtrl: NavController, 
@@ -43,10 +47,15 @@ export class NewPetPage {
       this.form = new FormGroup({
         name: new FormControl('', Validators.required),
         description: new FormControl('', Validators.required),
+        tipo: new FormControl('', Validators.required),
+        idade: new FormControl('', Validators.required)
       });
     } else {
       this.form = new FormGroup({
         description: new FormControl('', Validators.required),
+        idade: new FormControl('', Validators.required),
+        tipo: new FormControl('', Validators.required),
+        name: new FormControl('')
       });
     }
 
@@ -54,13 +63,18 @@ export class NewPetPage {
 
   pickImage() {
     this.fileService.getPicture().then((data) => {
-      console.log(data);
       if(data !== 'Selection cancelled.') this.src = data;
     });
   }
 
   
   add(type, form, location, locationStr, src) {
+    if(!this.userService.currentUser()) {
+      return this.alertService.showBasicAlert('É necessário fazer login para realizar esta ação', 'Ok', () => {
+        this.navCtrl.setRoot(LoginPage, null, { animate: true });
+      });
+    }
+
     if(form.valid && !!location) {
       let promise: any = type === 'lost' ? 
         this.lostService.add(form.value, location, locationStr, src) :
@@ -73,7 +87,11 @@ export class NewPetPage {
         loader.present();
 
         promise.then(() => {
-          // this.alertService.showBasicAlert('Enviado com sucesso', () => this.navCtrl.pop());
+          if(!!this.userService.currentUser().phone) {
+            this.alertService.showBasicAlert('Enviado com sucesso', 'Ok', () => this.navCtrl.pop());
+          } else {
+            this.alertService.showBasicAlert('Enviado com sucesso. Que tal atualizar seu telefone para contato agora?', 'Ok', () => this.navCtrl.push(ConfigPage), 'Não, obrigado.', () => this.navCtrl.pop());
+          }
           loader.dismiss();
         });
 
@@ -85,7 +103,7 @@ export class NewPetPage {
         msg = 'Por favor, preencha os campos antes de enviar';
       }
 
-      this.alertService.showBasicAlert(msg);
+      this.alertService.showBasicAlert(msg, 'Ok');
     }
   }
 

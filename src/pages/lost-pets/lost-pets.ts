@@ -27,7 +27,6 @@ export class LostPetsPage {
   }
 
   load(refresher?) {
-
     let loader;
     if(!refresher) {
       loader = this.loadCtrl.create({
@@ -37,13 +36,12 @@ export class LostPetsPage {
     }
 
     Geolocation.getCurrentPosition().then((resp: any) => {
-      console.log(resp);
       this.lostService.getAll(resp.coords.latitude, resp.coords.longitude).then((res) => {
         this.losts = res; 
         !!loader && loader.dismiss();
         !!refresher && refresher.complete();
       });
-    })
+    });
 
   }
 

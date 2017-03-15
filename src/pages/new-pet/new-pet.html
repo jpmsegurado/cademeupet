@@ -36,15 +36,30 @@
     </div> 
 
     <form [formGroup]="form" (submit)="add(type, form, location, locationStr, src)">
-      <ion-item *ngIf="type === 'lost'">
-        <ion-label>Nome do pet</ion-label>
+
+      <ion-item> 
+        <ion-label>Tipo do animal</ion-label>
+        <ion-select formControlName="tipo">
+          <ion-option *ngFor="let tipo of tipos" [value]="tipo.value">{{tipo.nome}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Nome do pet {{type !== 'lost' ? '(Opcional)' : ''}}</ion-label>
         <ion-input formControlName="name" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Idade (em meses)</ion-label> 
+        <ion-input type="number" formControlName="idade"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label>Descrição</ion-label>
         <ion-textarea formControlName="description"></ion-textarea>
       </ion-item>
+
+
     </form>
 
     <ion-item *ngIf="!!location">

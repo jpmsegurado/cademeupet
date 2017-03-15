@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { User } from '../../providers/user';
 import { MapPage } from '../map/map';
 import { Geocoder } from 'ionic-native';
 import { Alert } from '../../providers/alert';
 import { LoginPage } from '../login/login';
+import VMasker from 'vanilla-masker';
 
 
 /*
@@ -20,6 +21,7 @@ import { LoginPage } from '../login/login';
 export class ConfigPage {
 
   public user: any;
+  public tel: any = '';
 
   constructor(
     public navCtrl: NavController, 
@@ -27,11 +29,35 @@ export class ConfigPage {
     public userService: User,
     public modal: ModalController,
     public alertService: Alert,
-    public loadCtrl: LoadingController
+    public loadCtrl: LoadingController,
+    public el: ElementRef
   ) {
     this.user = this.userService.currentUser();
+    if(!!this.user && !!this.user.phone) this.tel = this.user.phone;
   }
 
+  ionViewDidLoad() {
+    function inputHandler(masks, max, event) {
+      var c = event.target;
+      var v = c.value.replace(/\D/g, '');
+      var m = c.value.length > max ? 1 : 0;
+      VMasker(c).unMask();
+      VMasker(c).maskPattern(masks[m]);
+      c.value = VMasker.toPattern(v, masks[m]);
+    }
+
+    var telMask = ['(99) 9999-99999', '(99) 99999-9999'];
+    var tel = this.el.nativeElement.querySelector('.tel input');
+    VMasker(tel).maskPattern(telMask[0]);
+    tel.addEventListener('input', inputHandler.bind(undefined, telMask, 14), false);
+  }
+
+  ionViewWillLeave() {
+    const tel = this.el.nativeElement.querySelector('.tel input').value;
+    if(tel.length >= 14) {
+      this.userService.updateTelefone(tel);
+    }
+  }
 
   loadMap() {
     this.navCtrl.push(MapPage, 

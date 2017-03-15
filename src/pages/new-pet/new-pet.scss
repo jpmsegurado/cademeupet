@@ -4,6 +4,18 @@ page-new-pet {
         text-align: justify;
     }
 
+    .img {
+            width: 100%;
+        display: flex;
+        justify-content: center;
+
+        img {
+            max-height: 200px;
+            margin: 20px 0;
+        }
+
+    }
+
     .pick-image { 
         display: block;
 

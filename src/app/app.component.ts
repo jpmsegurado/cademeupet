@@ -24,8 +24,9 @@ export class MyApp {
 
       StatusBar.styleDefault();
       Splashscreen.hide();
-
-      this.rootPage = userService.isLogged() ? HomePage : LoginPage;
+      userService.isLogged().then((logged) => {
+        this.rootPage = !!logged ? HomePage : LoginPage;
+      });
 
     });
   }

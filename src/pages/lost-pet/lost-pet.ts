@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MapPage } from '../map/map';
+import Config from '../../providers/config';
+import _ from 'lodash';
 
 /*
   Generated class for the FoundPet page.
@@ -16,6 +18,7 @@ import { MapPage } from '../map/map';
 export class LostPetPage {
 
   public pet: any;
+  public tipos: any = Config.tipos;
 
   constructor(
     public navCtrl: NavController, 
@@ -36,6 +39,11 @@ export class LostPetPage {
       title: 'Local do pet',
       info: 'Pet foi perdido aqui'
     }); 
+  }
+
+  getTipo(value) {
+    const index = _.findIndex(this.tipos, {value});
+    return this.tipos[index].nome;
   }
 
 

@@ -26,7 +26,10 @@ export class FoundPet {
       let newFound = new FoundPet();
       let point = new parse.GeoPoint({ latitude: location.lat, longitude: location.lng }); 
       if(!!url) newFound.set('photo', url);
+      if(!!pet.name) newFound.set('name', pet.name);
       newFound.set('description', pet.description);
+      newFound.set('tipo', pet.tipo);
+      newFound.set('idade', parseInt(pet.idade));
       newFound.set('location', point);
       newFound.set('location_description', locationStr);
       newFound.set('user', parse.User.current());
@@ -38,22 +41,11 @@ export class FoundPet {
  
   getAll(lat, long) {
 
-    // var poin = new parse.GeoPoint({ latitude: lat, longitude: long }); 
-    // var quer = new parse.Query('LostPet');
-    // quer.withinKilometers('location', poin, 25);
-    // quer.find({
-    //   success: function(res){
-    //     console.log(res)
-    //   },
-    //   error: function(err) {
-    //     console.log(err.message);
-    //   }
-    // });
-
-
     let point = new parse.GeoPoint({ latitude: lat, longitude: long }); 
     let query = new parse.Query('FoundPet');
     query.withinKilometers('location', point, 25);
+    query.descending('createdAt');
+    query.include('user');
     return query.find().then((res) => {
       return res.map((item) => {
         const parsed = item.toJSON();

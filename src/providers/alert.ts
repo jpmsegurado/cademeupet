@@ -14,17 +14,30 @@ export class Alert {
     private toastCtrl: ToastController
   ) {}
 
-  showBasicAlert(msg, callback?) {
+  showBasicAlert(msg, ok, callback?, cancel?, cancelCb?) {
+
+    let buttons: any = [
+      {
+        text: ok,
+        handler: () => {
+          !!callback && callback();
+        }
+      }
+    ];
+
+    if(!!cancel) {
+      const cancelbtn = {
+        text: cancel,
+        handler: () => {
+          !!cancelCb && cancelCb();
+        }
+      }
+      buttons.push(cancelbtn);
+    }
+
     const newAlert = this.alert.create({
       subTitle: msg,
-      buttons: [
-        {
-          text: 'Ok',
-          handler: () => {
-            !!callback && callback();
-          }
-        }
-      ]
+      buttons: buttons
     });
     return newAlert.present();
   } 

@@ -31,13 +31,20 @@
     </ion-list>
 
     <div padding>
-      <button ion-button full type="submit" [disabled]="loadingNormal">
+      <button ion-button full type="submit" [disabled]="loadingNormal || loadingFacebook">
         Entrar
         <ion-spinner *ngIf="loadingNormal"></ion-spinner>
       </button>
     </div>
 
   </form>
+
+  <div padding>
+    <button ion-button (click)="fb()" full [disabled]="loadingFacebook || loadingNormal">
+      Logar com Facebook
+      <ion-spinner *ngIf="loadingFacebook"></ion-spinner>
+    </button>
+  </div>
 
   <div padding>
     <ion-row>
@@ -49,7 +56,7 @@
 
       <ion-col>
         <button ion-button full clear (click)="pular()" [disabled]="loadingNormal">
-          Pular
+          Pular Login
         </button>
       </ion-col>
 

@@ -37,7 +37,6 @@ export class FoundPetsPage {
     }
 
     Geolocation.getCurrentPosition().then((resp: any) => {
-      console.log(resp);
       this.foundService.getAll(resp.coords.latitude, resp.coords.longitude).then((res) => {
         this.founds = res; 
         !!loader && loader.dismiss();

@@ -15,19 +15,19 @@
 
 <ion-content>
 
-  <ion-tabs tabsPlacement="top" class="my-tabs">
-    <ion-tab [root]="tab1Root" [rootParams]="navCtrl" tabTitle="Pets encontrados"></ion-tab>
-    <ion-tab [root]="tab2Root" [rootParams]="navCtrl" tabTitle="Pets perdidos"></ion-tab>
+  <ion-tabs tabsPlacement="top" tabsLayout="icon-top" class="my-tabs">
+    <ion-tab [root]="tab1Root" [rootParams]="navCtrl" tabIcon="paw" tabTitle="PETS ENCONTRADOS"></ion-tab>
+    <ion-tab [root]="tab2Root" [rootParams]="navCtrl" tabIcon="search" tabTitle="PETS DESAPARECIDOS"></ion-tab>
   </ion-tabs>
 
    <ion-fab bottom right >
-        <button ion-fab>
-        <ion-icon name="add"></ion-icon>
-        </button>
-        <ion-fab-list side="left">
+      <button ion-fab>
+        <ion-icon name="create"></ion-icon>
+      </button>
+      <ion-fab-list side="top">
         <button ion-button (click)="openNewPetPage('found')">Achei um pet</button>
         <button ion-button (click)="openNewPetPage('lost')">Perdi meu pet</button>
-        </ion-fab-list>
+      </ion-fab-list>
     </ion-fab>
  
 </ion-content>
