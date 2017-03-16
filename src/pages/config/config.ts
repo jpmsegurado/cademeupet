@@ -5,6 +5,7 @@ import { MapPage } from '../map/map';
 import { Geocoder } from 'ionic-native';
 import { Alert } from '../../providers/alert';
 import { LoginPage } from '../login/login';
+import { PetsAddedPage } from '../pets-added/pets-added';
 import VMasker from 'vanilla-masker';
 
 
@@ -91,6 +92,10 @@ export class ConfigPage {
 
   goToLogin() {
     this.navCtrl.setRoot(LoginPage, null, { animate: true });
+  }
+
+  openPets() {
+    this.navCtrl.push(PetsAddedPage);
   }
 
 }

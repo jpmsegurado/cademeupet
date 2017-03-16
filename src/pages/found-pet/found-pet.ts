@@ -4,6 +4,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MapPage } from '../map/map';
 import Config from '../../providers/config';
 import _ from 'lodash';
+import { User } from '../../providers/user';
+import { FoundPet } from '../../providers/found-pet';
 
 
 /*
@@ -20,11 +22,14 @@ export class FoundPetPage {
 
   public pet: any;
   public tipos: any = Config.tipos;
+  public loading: any = false;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    public foundService: FoundPet,
+    public userService: User
   ) {
     this.pet = navParams.get('pet');
   }
@@ -45,6 +50,19 @@ export class FoundPetPage {
       title: 'Local do pet',
       info: 'Pet encontrado aqui'
     }); 
+  }
+
+  isAdmin() {
+    return this.pet.user.objectId === this.userService.currentUser().objectId;
+  }
+
+  delete() {
+    this.loading = true;
+    this.foundService.delete(this.pet.objectId).then(() => {
+      this.navCtrl.pop();
+    }).catch(() => {
+      this.loading = false;
+    });
   }
 
 

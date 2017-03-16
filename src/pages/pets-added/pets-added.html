@@ -7,12 +7,33 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>pets-added</ion-title>
+    <ion-title>Meus pets</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+  <div *ngIf="pets.length === 0">
+    <p class="text-center">
+      Você ainda não adicionou nenhum pet
+    </p>
+  </div>
+  <ion-list>
+        <ion-card *ngFor="let pet of pets" (click)="open(pet)">
+        <div class="img-wrapper">
+            <img [src]="pet.photo + '-/resize/300x/'"/>
+        </div>
+        <ion-card-content>
+            <h2>
+            {{!!pet.name ? pet.name : pet.description}}
+            </h2>
+            <p *ngIf="!!pet.name">{{pet.description}}</p>
+            <p>{{pet.trueDistance}} km de distância</p>
+        </ion-card-content>
+        </ion-card>
+        
+    </ion-list>
 
 </ion-content>

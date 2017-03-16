@@ -38,6 +38,13 @@ export class FoundPet {
 
     });
   }
+
+  delete(id) {
+    let FoundPet = parse.Object.extend('FoundPet');
+    let newFound = new FoundPet();
+    newFound.id = id;
+    return newFound.destroy();
+  }
  
   getAll(lat, long) {
 
@@ -50,6 +57,19 @@ export class FoundPet {
       return res.map((item) => {
         const parsed = item.toJSON();
         parsed.trueDistance = this.getDistanceFromLatLonInKm(lat, long, item.toJSON().location.latitude, item.toJSON().location.longitude);
+        return parsed;
+      });
+    });
+  }
+
+  getMine() {
+    let query = new parse.Query('FoundPet');
+    query.descending('createdAt');
+    query.equalTo('user', parse.User.current());
+    return query.find().then((res) => {
+      return res.map((item) => {
+        const parsed = item.toJSON();
+        parsed.type = 'found';
         return parsed;
       });
     });

@@ -38,6 +38,26 @@ export class LostPet {
 
     });
   }
+
+  getMine() {
+    let query = new parse.Query('LostPet');
+    query.descending('createdAt');
+    query.equalTo('user', parse.User.current());
+    return query.find().then((res) => {
+      return res.map((item) => {
+        const parsed = item.toJSON();
+        parsed.type = 'lost';
+        return parsed;
+      });
+    });
+  }
+  
+  delete(id) {
+    let FoundPet = parse.Object.extend('LostPet');
+    let newFound = new FoundPet();
+    newFound.id = id;
+    return newFound.destroy();
+  }
  
   getAll(lat, long) {
     let point = new parse.GeoPoint({ latitude: lat, longitude: long }); 

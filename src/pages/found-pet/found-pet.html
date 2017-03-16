@@ -8,6 +8,12 @@
 
   <ion-navbar>
     <ion-title>Pet encontrado</ion-title>
+    <ion-buttons end *ngIf="isAdmin()">
+      <button ion-button icon-only (click)="delete()">
+        <ion-icon name="trash" *ngIf="!loading"></ion-icon>
+        <ion-spinner *ngIf="!!loading"></ion-spinner>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
