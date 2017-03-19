@@ -45,13 +45,15 @@
       </ion-item>
 
       <ion-item>
-        <ion-label>Nome do pet {{type !== 'lost' ? '(Opcional)' : ''}}</ion-label>
-        <ion-input formControlName="name" type="text"></ion-input>
+        <ion-label>Faixa de idade</ion-label> 
+        <ion-select formControlName="faixa">
+          <ion-option *ngFor="let faixa of faixas" [value]="faixa.value">{{faixa.nome}}</ion-option>
+        </ion-select>
       </ion-item>
 
       <ion-item>
-        <ion-label>Idade (em meses)</ion-label> 
-        <ion-input type="number" formControlName="idade"></ion-input>
+        <ion-label>Nome do pet {{type !== 'lost' ? '(Opcional)' : ''}}</ion-label>
+        <ion-input formControlName="name" type="text"></ion-input>
       </ion-item>
 
       <ion-item>

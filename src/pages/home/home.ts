@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
-import { FoundPet } from '../../providers/found-pet';
+import { NavController, PopoverController } from 'ionic-angular';
 import { ConfigPage } from '../config/config';
-import { FoundPetPage } from '../found-pet/found-pet';
 import { FoundPetsPage } from '../found-pets/found-pets';
 import { LostPetsPage } from '../lost-pets/lost-pets';
 import { NewPetPage } from '../new-pet/new-pet';
-import { Geolocation } from 'ionic-native';
+import { FilterOptionsPage } from '../filter-options/filter-options';
+import { FiltersPage } from '../filters/filters';
 
 
 @Component({
@@ -21,13 +20,28 @@ export class HomePage {
   public tab2Root = LostPetsPage;
 
   constructor(
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public popCtrl: PopoverController
   ) {
     
   }
 
   openNewPetPage(type) { 
     this.navCtrl.push(NewPetPage, { type });
+  }
+
+  options(event){
+    let popover = this.popCtrl.create(FilterOptionsPage);
+    popover.present({
+      ev: event
+    });
+
+    popover.onDidDismiss((res) => {
+      if(!!res){
+        if(res === 'profile') this.goToConfig();
+        if(res === 'filter') this.navCtrl.push(FiltersPage);
+      }
+    });
   }
 
 

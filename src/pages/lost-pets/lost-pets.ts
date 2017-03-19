@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavParams, LoadingController } from 'ionic-angular';
 import { LostPet } from '../../providers/lost-pet';
 import { LostPetPage } from '../lost-pet/lost-pet';
 import { Geolocation } from 'ionic-native';

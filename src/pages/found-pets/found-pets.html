@@ -9,7 +9,9 @@
         </ion-refresher-content>
     </ion-refresher>
 
-    <ion-list>
+    <blank-state *ngIf="founds.length === 0" showIcon="true" iconName="sad" msg="Nenhum pet foi encontrado próximo a você"></blank-state>
+
+    <ion-list *ngIf="founds.length > 0">
           
         <ion-card *ngFor="let found of founds" (click)="openFoundPet(found)">
             <div class="img-wrapper">

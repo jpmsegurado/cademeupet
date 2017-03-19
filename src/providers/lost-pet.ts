@@ -29,7 +29,7 @@ export class LostPet {
       newFound.set('description', pet.description);
       newFound.set('name', pet.name);
       newFound.set('tipo', pet.tipo);
-      newFound.set('idade', parseInt(pet.idade));
+      newFound.set('faixa', parseInt(pet.faixa));
       newFound.set('location', point);
       newFound.set('location_description', locationStr);
       newFound.set('user', parse.User.current());

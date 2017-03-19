@@ -30,6 +30,7 @@ export class NewPetPage {
   public locationStr: any;
   public src: any = '';
   public tipos = Config.tipos;
+  public faixas = Config.faixas;
 
   constructor(
     public navCtrl: NavController, 
@@ -48,12 +49,12 @@ export class NewPetPage {
         name: new FormControl('', Validators.required),
         description: new FormControl('', Validators.required),
         tipo: new FormControl('', Validators.required),
-        idade: new FormControl('', Validators.required)
+        faixa: new FormControl('', Validators.required)
       });
     } else {
       this.form = new FormGroup({
         description: new FormControl('', Validators.required),
-        idade: new FormControl('', Validators.required),
+        faixa: new FormControl('', Validators.required),
         tipo: new FormControl('', Validators.required),
         name: new FormControl('')
       });
@@ -90,7 +91,12 @@ export class NewPetPage {
           if(!!this.userService.currentUser().phone) {
             this.alertService.showBasicAlert('Enviado com sucesso', 'Ok', () => this.navCtrl.pop());
           } else {
-            this.alertService.showBasicAlert('Enviado com sucesso. Que tal atualizar seu telefone para contato agora?', 'Ok', () => this.navCtrl.push(ConfigPage), 'Não, obrigado.', () => this.navCtrl.pop());
+            this.navCtrl.pop();
+            this.alertService.showBasicAlert(
+              'Enviado com sucesso. Que tal atualizar seu telefone para contato agora?', 
+              'Ok', 
+              () => this.navCtrl.push(ConfigPage), 
+              'Não, obrigado.');
           }
           loader.dismiss();
         });

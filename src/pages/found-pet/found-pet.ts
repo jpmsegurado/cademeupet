@@ -23,6 +23,7 @@ export class FoundPetPage {
   public pet: any;
   public tipos: any = Config.tipos;
   public loading: any = false;
+  public faixas: any = Config.faixas;
 
   constructor(
     public navCtrl: NavController, 
@@ -65,5 +66,9 @@ export class FoundPetPage {
     });
   }
 
+  getAge(value) {
+    const index = _.findIndex(this.faixas, {value});
+    return this.faixas[index].nome;
+  }
 
 }

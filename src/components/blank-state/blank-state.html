@@ -1,0 +1,7 @@
+<div class="blank-state">
+  <div class="content">
+    <ion-icon *ngIf="!!showIcon" [name]="iconName"></ion-icon>
+    <img *ngIf="!showIcon" [src]="src">
+    <p>{{msg}}</p>
+  </div>
+</div>

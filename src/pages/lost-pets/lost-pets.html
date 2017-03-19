@@ -8,6 +8,8 @@
         refreshingText="Atualizando...">
         </ion-refresher-content>
     </ion-refresher> 
+ 
+    <blank-state *ngIf="losts.length === 0" showIcon="true" iconName="happy" msg="Não há nenhum pet desaparecido por perto."></blank-state>
 
     <ion-list>
         <ion-card *ngFor="let lost of losts" (click)="openLostPet(lost)">

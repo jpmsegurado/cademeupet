@@ -21,6 +21,7 @@ export class LostPetPage {
 
   public pet: any;
   public tipos: any = Config.tipos;
+  public faixas: any = Config.faixas;
   public loading: any = false;
 
   constructor(
@@ -62,6 +63,11 @@ export class LostPetPage {
   getTipo(value) {
     const index = _.findIndex(this.tipos, {value});
     return this.tipos[index].nome;
+  }
+
+  getAge(value) {
+    const index = _.findIndex(this.faixas, {value});
+    return this.faixas[index].nome;
   }
 
 

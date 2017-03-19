@@ -12,6 +12,9 @@ import { LostPetPage } from '../pages/lost-pet/lost-pet';
 import { LostPetsPage } from '../pages/lost-pets/lost-pets';
 import { NewPetPage } from '../pages/new-pet/new-pet';
 import { PetsAddedPage } from '../pages/pets-added/pets-added';
+import { FilterOptionsPage } from '../pages/filter-options/filter-options';
+import { FiltersPage } from '../pages/filters/filters';
+import { BlankStateComponent } from '../components/blank-state/blank-state';
 
 import { FoundPet } from '../providers/found-pet';
 import { LostPet } from '../providers/lost-pet';
@@ -33,7 +36,10 @@ import { Storage } from '@ionic/storage';
     LostPetPage,
     LostPetsPage,
     NewPetPage,
-    PetsAddedPage
+    PetsAddedPage,
+    FilterOptionsPage,
+    FiltersPage,
+    BlankStateComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -51,7 +57,9 @@ import { Storage } from '@ionic/storage';
     LostPetPage,
     LostPetsPage,
     NewPetPage,
-    PetsAddedPage
+    PetsAddedPage,
+    FilterOptionsPage,
+    FiltersPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

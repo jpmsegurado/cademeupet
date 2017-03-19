@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavParams, LoadingController } from 'ionic-angular';
 import { FoundPet } from '../../providers/found-pet';
 import { FoundPetPage } from '../found-pet/found-pet';
 import { Geolocation } from 'ionic-native';
@@ -39,6 +39,9 @@ export class FoundPetsPage {
     Geolocation.getCurrentPosition().then((resp: any) => {
       this.foundService.getAll(resp.coords.latitude, resp.coords.longitude).then((res) => {
         this.founds = res; 
+        !!loader && loader.dismiss();
+        !!refresher && refresher.complete();
+      }).catch(() => {
         !!loader && loader.dismiss();
         !!refresher && refresher.complete();
       });
