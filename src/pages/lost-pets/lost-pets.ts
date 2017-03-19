@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, LoadingController } from 'ionic-angular';
+import { NavParams, LoadingController, Events } from 'ionic-angular';
 import { LostPet } from '../../providers/lost-pet';
 import { LostPetPage } from '../lost-pet/lost-pet';
 import { Geolocation } from 'ionic-native';
@@ -17,9 +17,11 @@ export class LostPetsPage {
   constructor(
     public navParams: NavParams,
     public lostService: LostPet,
-    public loadCtrl: LoadingController
+    public loadCtrl: LoadingController,
+    public events: Events
   ) {
     this.navCtrl = navParams.data;
+    this.events.subscribe('changedFilters', () => this.load());
   }
 
   ionViewDidLoad() {

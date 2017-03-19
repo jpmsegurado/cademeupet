@@ -21,6 +21,7 @@ import { LostPet } from '../providers/lost-pet';
 import { User } from '../providers/user';
 import { Alert } from '../providers/alert';
 import { File } from '../providers/file';
+import { Filters } from '../providers/filters';
 import { Storage } from '@ionic/storage';
 
 @NgModule({
@@ -68,7 +69,8 @@ import { Storage } from '@ionic/storage';
     User,
     Alert,
     File,
-    Storage
+    Storage,
+    Filters
   ]
 })
 export class AppModule {}

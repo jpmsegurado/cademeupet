@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
 
 /*
   Generated class for the Filters provider.
@@ -11,8 +9,25 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Filters {
 
-  constructor(public http: Http) {
-    console.log('Hello Filters Provider');
+  private tipo;
+  private faixa;
+
+  constructor() {}
+
+  getTipo() {
+    return this.tipo;
+  }
+
+  getFaixa() {
+    return this.faixa;
+  }
+
+  setFaixa(faixa) {
+    this.faixa = faixa;
+  }
+
+  setTipo(tipo) {
+    this.tipo = tipo;
   }
 
 }

@@ -17,19 +17,19 @@
 
   <ion-list>
     
-    <!--<ion-item> 
-        <ion-label>Tipo do animal</ion-label>
-        <ion-select [(ngModel)]="filters.tipo">
-          <ion-option *ngFor="let tipo of tipos" [value]="tipo.value">{{tipo.nome}}</ion-option>
-        </ion-select>
-      </ion-item>
+    <ion-item> 
+      <ion-label>Tipo do animal</ion-label>
+      <ion-select (ionChange)="changeTipo(filters.tipo)" [(ngModel)]="filters.tipo">
+        <ion-option *ngFor="let tipo of tipos" [value]="tipo.value">{{tipo.nome}}</ion-option>
+      </ion-select>
+    </ion-item>
 
-      <ion-item>
-        <ion-label>Faixa de idade</ion-label> 
-        <ion-select [(ngModel)]="filters.faixa">
-          <ion-option *ngFor="let faixa of faixas" [value]="faixa.value">{{faixa.nome}}</ion-option>
-        </ion-select>
-      </ion-item>-->
+    <ion-item>
+      <ion-label>Faixa de idade</ion-label> 
+      <ion-select (ionChange)="changeFaixa(filters.faixa)" [(ngModel)]="filters.faixa">
+        <ion-option *ngFor="let faixa of faixas" [value]="faixa.value">{{faixa.nome}}</ion-option>
+      </ion-select>
+    </ion-item>
     
   </ion-list>
 
