@@ -16,6 +16,7 @@ export class BlankStateComponent {
   @Input() iconName;
   @Input() src;
   @Input() msg;
+  @Input() showSpinner;
 
   constructor() {
     

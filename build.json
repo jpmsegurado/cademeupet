@@ -1,0 +1,11 @@
+{
+    "android": {
+        "release": {
+            "keystore": "./cademeupet.jks",
+            "storePassword": "dontguessit",
+            "alias": "cademeupet",
+            "password" : "dontguessit",
+            "keystoreType": "JKS"
+        }
+    }
+}

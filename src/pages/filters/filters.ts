@@ -24,12 +24,23 @@ export class FiltersPage {
     public navParams: NavParams,
     public events: Events,
     public filterService: Filters
-  ) {}
+  ) {
+    this.filters.faixa = this.filterService.getFaixa();
+    this.filters.tipo = this.filterService.getTipo();
+  }
 
   changeTipo(tipo) {
     console.log(tipo);
     this.filterService.setTipo(tipo);
     this.events.publish('changedFilters');
+  }
+
+  clear() {
+    this.filterService.setTipo(null);
+    this.filterService.setFaixa(null);
+    this.navCtrl.pop().then(() => {
+      this.events.publish('changedFilters');
+    });
   }
 
   changeFaixa(faixa) {

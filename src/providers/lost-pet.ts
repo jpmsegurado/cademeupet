@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import parse from './parse';
 import { File } from './file';
+import { Filters } from './filters';
 
 /*
   Generated class for the FoundPet provider.
@@ -12,7 +13,8 @@ import { File } from './file';
 export class LostPet {
 
   constructor(
-    private fileService: File
+    private fileService: File,
+    private filterService: Filters
   ) {
 
   }
@@ -65,6 +67,12 @@ export class LostPet {
     query.withinKilometers('location', point, 25);
     query.descending('createdAt');
     query.include('user');
+
+    const faixa = this.filterService.getFaixa(), tipo = this.filterService.getTipo();
+
+    if(faixa) query.equalTo('faixa', faixa);
+    if(tipo) query.equalTo('tipo', tipo);
+
     return query.find().then((res) => {
       return res.map((item) => {
         const parsed = item.toJSON();

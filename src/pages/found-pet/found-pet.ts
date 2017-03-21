@@ -49,7 +49,8 @@ export class FoundPetPage {
     this.navCtrl.push(MapPage, 
     {
       title: 'Local do pet',
-      info: 'Pet encontrado aqui'
+      info: 'Pet encontrado aqui',
+      location: pet.location
     }); 
   }
 

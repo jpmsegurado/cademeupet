@@ -13,6 +13,7 @@ export class LostPetsPage {
 
   public losts: any = [];
   public navCtrl: any;
+  public loading: any = false;
 
   constructor(
     public navParams: NavParams,
@@ -29,18 +30,14 @@ export class LostPetsPage {
   }
 
   load(refresher?) {
-    let loader;
     if(!refresher) {
-      loader = this.loadCtrl.create({
-        content: 'Carregando...'
-      });
-      loader.present();
+      this.loading = true;
     }
 
     Geolocation.getCurrentPosition().then((resp: any) => {
       this.lostService.getAll(resp.coords.latitude, resp.coords.longitude).then((res) => {
         this.losts = res; 
-        !!loader && loader.dismiss();
+        if(!refresher) this.loading = false;
         !!refresher && refresher.complete();
       });
     });

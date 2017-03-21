@@ -13,6 +13,7 @@ export class FoundPetsPage {
 
   public founds: any = [];
   public navCtrl: any;
+  public loading: any = true;
 
   constructor(
     public navParams: NavParams,
@@ -30,21 +31,17 @@ export class FoundPetsPage {
 
   load(refresher?) {
 
-    let loader;
     if(!refresher) {
-      loader = this.loadCtrl.create({
-        content: 'Carregando...'
-      });
-      loader.present();
+      this.loading = true;
     }
 
     Geolocation.getCurrentPosition().then((resp: any) => {
       this.foundService.getAll(resp.coords.latitude, resp.coords.longitude).then((res) => {
         this.founds = res; 
-        !!loader && loader.dismiss();
+        if(!refresher) this.loading = false;
         !!refresher && refresher.complete();
       }).catch(() => {
-        !!loader && loader.dismiss();
+        if(!refresher) this.loading = false;
         !!refresher && refresher.complete();
       });
     })

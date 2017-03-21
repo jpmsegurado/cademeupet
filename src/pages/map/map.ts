@@ -35,9 +35,13 @@ export class MapPage {
 
   ionViewDidLoad() {
     !!this.msg && this.alertService.showBasicToast(this.msg);
-    Geolocation.getCurrentPosition().then((resp) => {
-      this.loadMap(resp.coords);
-    });
+    if(!!this.navParams.get('location')) {
+      this.loadMap(this.navParams.get('location'));
+    } else {
+      Geolocation.getCurrentPosition().then((resp) => {
+        this.loadMap(resp.coords);
+      });
+    }
   }
 
   loadMap(coords) {

@@ -47,7 +47,8 @@ export class LostPetPage {
     this.navCtrl.push(MapPage, 
     {
       title: 'Local do pet',
-      info: 'Pet foi perdido aqui'
+      info: 'Pet foi perdido aqui',
+      location: pet.location
     }); 
   }
 
