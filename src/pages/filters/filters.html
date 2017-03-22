@@ -31,6 +31,13 @@
         <ion-option *ngFor="let tipo of tipos" [value]="tipo.value">{{tipo.nome}}</ion-option>
       </ion-select>
     </ion-item>
+    
+    <ion-item *ngIf="racas.length > 0"> 
+      <ion-label>Raça</ion-label>
+      <ion-select (ionChange)="changeRaca(filters.raca)" [(ngModel)]="filters.raca">
+        <ion-option *ngFor="let raca of racas" [value]="raca">{{raca}}</ion-option>
+      </ion-select>
+    </ion-item>
 
     <ion-item>
       <ion-label>Faixa de idade</ion-label> 
@@ -38,6 +45,7 @@
         <ion-option *ngFor="let faixa of faixas" [value]="faixa.value">{{faixa.nome}}</ion-option>
       </ion-select>
     </ion-item>
+    
     
   </ion-list>
 

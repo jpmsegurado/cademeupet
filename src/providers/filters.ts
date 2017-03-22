@@ -11,6 +11,7 @@ export class Filters {
 
   private tipo;
   private faixa;
+  private raca;
 
   constructor() {}
 
@@ -22,12 +23,20 @@ export class Filters {
     return this.faixa;
   }
 
+  getRaca() {
+    return this.raca;
+  }
+
   setFaixa(faixa) {
     this.faixa = faixa;
   }
 
   setTipo(tipo) {
     this.tipo = tipo;
+  }
+
+  setRaca(raca) {
+    this.raca = raca;
   }
 
 }

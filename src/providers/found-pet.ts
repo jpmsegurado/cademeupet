@@ -33,6 +33,7 @@ export class FoundPet {
       newFound.set('tipo', pet.tipo);
       newFound.set('faixa', parseInt(pet.faixa));
       newFound.set('location', point);
+      newFound.set('raca', pet.raca);
       newFound.set('location_description', locationStr);
       newFound.set('user', parse.User.current());
 
@@ -56,10 +57,13 @@ export class FoundPet {
     query.descending('createdAt');
     query.include('user');
 
-    const faixa = this.filterService.getFaixa(), tipo = this.filterService.getTipo();
+    const faixa = this.filterService.getFaixa(), 
+          tipo = this.filterService.getTipo(),
+          raca = this.filterService.getRaca();
 
     if(faixa) query.equalTo('faixa', faixa);
     if(tipo) query.equalTo('tipo', tipo);
+    if(raca) query.equalTo('raca', raca);
 
     return query.find().then((res) => {
       return res.map((item) => {

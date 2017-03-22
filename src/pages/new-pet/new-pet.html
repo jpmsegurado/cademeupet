@@ -39,8 +39,15 @@
 
       <ion-item> 
         <ion-label>Tipo do animal</ion-label>
-        <ion-select formControlName="tipo">
+        <ion-select (ionChange)="changedTipo(form)" formControlName="tipo">
           <ion-option *ngFor="let tipo of tipos" [value]="tipo.value">{{tipo.nome}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item *ngIf="racas.length > 0"> 
+        <ion-label>Raça</ion-label>
+        <ion-select formControlName="raca">
+          <ion-option *ngFor="let raca of racas" [value]="raca">{{raca}}</ion-option>
         </ion-select>
       </ion-item>
 

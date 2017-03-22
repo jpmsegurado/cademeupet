@@ -32,7 +32,7 @@
       <ion-item *ngIf="!!pet.tipo">
         <ion-icon name="paw" item-left></ion-icon>
         <ion-label>
-          {{getTipo(pet.tipo)}} - {{getAge(pet.faixa)}}
+          {{getTipo(pet.tipo)}} {{!!pet.raca ? '- ' + pet.raca : ''}} - {{getAge(pet.faixa)}}
         </ion-label>
       </ion-item>
 

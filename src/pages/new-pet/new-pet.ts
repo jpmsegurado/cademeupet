@@ -11,6 +11,7 @@ import { Alert } from '../../providers/alert';
 import { FoundPet } from '../../providers/found-pet';
 import { LostPet } from '../../providers/lost-pet';
 import Config from '../../providers/config';
+import _ from 'lodash';
 
 /*
   Generated class for the NewPet page.
@@ -31,6 +32,8 @@ export class NewPetPage {
   public src: any = '';
   public tipos = Config.tipos;
   public faixas = Config.faixas;
+  public racas: any = [];
+  public raca: any = '';
 
   constructor(
     public navCtrl: NavController, 
@@ -49,14 +52,16 @@ export class NewPetPage {
         name: new FormControl('', Validators.required),
         description: new FormControl('', Validators.required),
         tipo: new FormControl('', Validators.required),
-        faixa: new FormControl('', Validators.required)
+        faixa: new FormControl('', Validators.required),
+        raca: new FormControl('')
       });
     } else {
       this.form = new FormGroup({
         description: new FormControl('', Validators.required),
         faixa: new FormControl('', Validators.required),
         tipo: new FormControl('', Validators.required),
-        name: new FormControl('')
+        name: new FormControl(''),
+        raca: new FormControl('')
       });
     }
 
@@ -68,6 +73,19 @@ export class NewPetPage {
     });
   }
 
+  changedTipo(form) {
+    const index = _.findIndex(this.tipos, {value: form.value.tipo});
+    const tipo: any = this.tipos[index];
+
+    if(tipo.racas) {
+      this.racas = tipo.racas;
+    } else {
+      this.racas = [];
+    }
+
+    this.raca = '';
+
+  }
   
   add(type, form, location, locationStr, src) {
     if(!this.userService.currentUser()) {
