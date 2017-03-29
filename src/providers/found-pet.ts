@@ -17,6 +17,15 @@ export class FoundPet {
     public filterService: Filters
   ) {
 
+    // let FoundPet = parse.Object.extend('FoundPet');
+    // let newFound = new FoundPet();
+    // newFound.id = '3aiUI6YbrG';
+    // var roleACL = new parse.ACL();
+    // roleACL.setPublicReadAccess(true);
+    // roleACL.setRoleWriteAccess("Moderators", true);
+    // newFound.setACL(roleACL);
+    // newFound.save();
+
   }
 
 
@@ -59,11 +68,13 @@ export class FoundPet {
 
     const faixa = this.filterService.getFaixa(), 
           tipo = this.filterService.getTipo(),
+          raio = this.filterService.getRaio(),
           raca = this.filterService.getRaca();
-
+          
     if(faixa) query.equalTo('faixa', faixa);
     if(tipo) query.equalTo('tipo', tipo);
     if(raca) query.equalTo('raca', raca);
+    if(raio) query.withinKilometers('location', point, raio);
 
     return query.find().then((res) => {
       return res.map((item) => {

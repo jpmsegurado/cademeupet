@@ -65,17 +65,19 @@ export class LostPet {
   getAll(lat, long) {
     let point = new parse.GeoPoint({ latitude: lat, longitude: long }); 
     let query = new parse.Query('LostPet');
-    query.withinKilometers('location', point, 25);
+
     query.descending('createdAt');
     query.include('user');
 
     const faixa = this.filterService.getFaixa(), 
           tipo = this.filterService.getTipo(),
+          raio = this.filterService.getRaio(),
           raca = this.filterService.getRaca();
 
     if(faixa) query.equalTo('faixa', faixa);
     if(tipo) query.equalTo('tipo', tipo);
     if(raca) query.equalTo('raca', raca);
+    if(raio) query.withinKilometers('location', point, raio);
 
     return query.find().then((res) => {
       return res.map((item) => {

@@ -28,7 +28,7 @@
 
     <ion-item>
       <ion-icon item-left name="call"></ion-icon>
-      <ion-input class="tel" type="tel" placeholder="Digite aqui um telefone para contato" [(ngModel)]="tel"></ion-input>
+      <ion-input class="tel" type="tel" placeholder="Digite aqui um telefone para contato" [(ngModel)]="tel" novalidate></ion-input>
     </ion-item>
 
     <div padding *ngIf="tel.length === 0">

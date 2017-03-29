@@ -34,6 +34,8 @@ export class NewPetPage {
   public faixas = Config.faixas;
   public racas: any = [];
   public raca: any = '';
+  public loadingLocation: any = false;
+
 
   constructor(
     public navCtrl: NavController, 
@@ -147,15 +149,15 @@ export class NewPetPage {
           }
         };
 
-        let loader = this.loadCtrl.create({
-          content: "Carregando informações"
-        });
-        loader.present();
+        this.loadingLocation = true;
 
         Geocoder.geocode(req).then((res) => {
           this.locationStr = res[0].extra.lines.join(',');
           this.location = req.position;
-          loader.dismiss();
+          this.loadingLocation = false;
+        }, () => {
+          this.loadingLocation = false;
+          this.alertService.showBasicAlert('Não foi possível carregar o endereço, tente novamente mais tarde', 'Ok');
         });
 
       }

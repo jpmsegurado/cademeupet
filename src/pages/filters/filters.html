@@ -24,6 +24,19 @@
 <ion-content>
 
   <ion-list>
+
+    <ion-list-header>
+      <ion-icon item-left name="pin"></ion-icon>
+      <ion-label>Raio de pesquisa</ion-label>
+      <ion-badge item-right>{{raio}} km</ion-badge>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-range (ionChange)="changeRaio(raio)" step="10" min="10" max="200" color="primary" [(ngModel)]="raio">
+        <ion-label range-left>10</ion-label>
+        <ion-label range-right>200</ion-label>
+      </ion-range>
+    </ion-item>
     
     <ion-item> 
       <ion-label>Tipo do animal</ion-label>
@@ -45,7 +58,6 @@
         <ion-option *ngFor="let faixa of faixas" [value]="faixa.value">{{faixa.nome}}</ion-option>
       </ion-select>
     </ion-item>
-    
     
   </ion-list>
 

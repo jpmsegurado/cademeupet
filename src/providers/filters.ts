@@ -12,6 +12,7 @@ export class Filters {
   private tipo;
   private faixa;
   private raca;
+  private raio = 25;
 
   constructor() {}
 
@@ -37,6 +38,14 @@ export class Filters {
 
   setRaca(raca) {
     this.raca = raca;
+  }
+
+  getRaio(){
+    return this.raio;
+  }
+
+  setRaio(raio) {
+    this.raio = raio;
   }
 
 }

@@ -40,7 +40,8 @@ export class LostPetPage {
   }
 
   isAdmin() {
-    return this.pet.user.objectId === this.userService.currentUser().objectId;
+    const user = this.userService.currentUser();
+    return !!user && this.pet.user.objectId === user.objectId;
   }
 
   openMap(pet) {

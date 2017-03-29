@@ -1,5 +1,5 @@
 import { Component, ElementRef } from '@angular/core';
-import { NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, LoadingController, Events } from 'ionic-angular';
 import { User } from '../../providers/user';
 import { MapPage } from '../map/map';
 import { Geocoder } from 'ionic-native';
@@ -7,6 +7,7 @@ import { Alert } from '../../providers/alert';
 import { LoginPage } from '../login/login';
 import { PetsAddedPage } from '../pets-added/pets-added';
 import VMasker from 'vanilla-masker';
+import { Filters } from '../../providers/filters';
 
 
 /*
@@ -23,6 +24,8 @@ export class ConfigPage {
 
   public user: any;
   public tel: any = '';
+  public raio: any = 10;
+  public loadingLocation: any = false;
 
   constructor(
     public navCtrl: NavController, 
@@ -31,9 +34,12 @@ export class ConfigPage {
     public modal: ModalController,
     public alertService: Alert,
     public loadCtrl: LoadingController,
-    public el: ElementRef
+    public el: ElementRef,
+    public filtersService: Filters,
+    public events: Events
   ) {
     this.user = this.userService.currentUser();
+    this.raio = this.filtersService.getRaio();
     if(!!this.user && !!this.user.phone) this.tel = this.user.phone;
   }
 
@@ -55,9 +61,14 @@ export class ConfigPage {
 
   ionViewWillLeave() {
     const tel = this.el.nativeElement.querySelector('.tel input').value;
-    if(tel.length >= 14) {
+    if(tel.length >= 14
+  ) {
       this.userService.updateTelefone(tel);
     }
+  }
+
+  changeRaio(raio) {
+    this.filtersService.setRaio(raio);
   }
 
   loadMap() {
@@ -73,16 +84,16 @@ export class ConfigPage {
           }
         };
 
-         let loader = this.loadCtrl.create({
-          content: "Carregando informações"
-        });
-        loader.present();
+        this.loadingLocation = true;
 
         Geocoder.geocode(req).then((res) => {
           const address = res[0].extra.lines.join(',');
           this.userService.updateAddress(address, lat, lng).then(() => {
             this.user = this.userService.currentUser();
-            loader.dismiss();
+            this.loadingLocation = false;
+          }, () => {
+            this.loadingLocation = false;
+            this.alertService.showBasicAlert('Não foi possível carregar seu endereço no momento, tente mais tarde.', 'Ok');
           });
         });
 

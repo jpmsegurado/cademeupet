@@ -62,6 +62,9 @@ export class FiltersPage {
     this.events.publish('changedFilters');
   }
 
+  changeRaio(raio) {
+    this.filterService.setRaio(raio);
+  }
 
   changeRaca(raca) {
     this.filterService.setRaca(raca);

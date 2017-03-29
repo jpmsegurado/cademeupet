@@ -71,13 +71,16 @@
 
     </form>
 
-    <ion-item *ngIf="!!location">
-      <ion-label>Endereço</ion-label>
-      <ion-input [(ngModel)]="locationStr" readonly></ion-input>
+    <ion-item class="location" *ngIf="!!location">
+      <h2 color="gray">Endereço</h2>
+      <p>{{locationStr}}</p>
     </ion-item>
 
     <div padding *ngIf="!location">
-      <button full ion-button (click)="openMap(type)">{{type === 'found' ? 'Mostre onde encontrou o pet' : 'Mostre onde perdeu o pet'}}</button>
+      <button full ion-button (click)="openMap(type)" [disabled]="loadingLocation">
+        {{type === 'found' ? 'Mostre onde encontrou o pet' : 'Mostre onde perdeu o pet'}}
+        <ion-spinner *ngIf="loadingLocation"></ion-spinner>
+      </button>
       <p *ngIf="type === 'found'">Ao informar a localização, os usuários que adicionaram pets perdidos nas proximidades serão notificados</p> 
       <p *ngIf="type !== 'found'">Ao informar a localização, sempre que um pet for encontrado nas proximidades, você receberá uma notificação.</p> 
     </div>
