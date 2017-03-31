@@ -5,6 +5,7 @@ import { HomePage } from '../pages/home/home';
 import { ConfigPage } from '../pages/config/config';
 import { RegisterPage } from '../pages/register/register';
 import { LoginPage } from '../pages/login/login';
+import { IntroPage } from '../pages/intro/intro';
 import { MapPage } from '../pages/map/map';
 import { FoundPetPage } from '../pages/found-pet/found-pet';
 import { FoundPetsPage } from '../pages/found-pets/found-pets';
@@ -40,10 +41,17 @@ import { Storage } from '@ionic/storage';
     PetsAddedPage,
     FilterOptionsPage,
     FiltersPage,
-    BlankStateComponent
+    BlankStateComponent,
+    IntroPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {
+      platforms: {
+        ios: {
+          backButtonText: 'Voltar'
+        }
+      }
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -60,7 +68,8 @@ import { Storage } from '@ionic/storage';
     NewPetPage,
     PetsAddedPage,
     FilterOptionsPage,
-    FiltersPage
+    FiltersPage,
+    IntroPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

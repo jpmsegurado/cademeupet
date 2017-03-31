@@ -1,0 +1,79 @@
+page-intro {
+  .content-ios .fixed-content {
+    background-color: color($colors, primary);
+  }
+
+  
+
+  ion-icon {
+    color: color($colors, white);
+  }
+
+  [ion-fixed] {
+    text-align: right;
+    width: 100%;
+  }
+
+  ion-slide {
+    background: color($colors, primary, base);
+  }
+
+  .slide-header {
+    height: 60%;
+    overflow: hidden;
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 1%,rgba(86,86,86,0) 0%,rgba(0,0,0,.2) 99%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(255,255,255,0) 1%,rgba(86,86,86,0) 0%,rgba(0,0,0,.2) 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  }
+
+  .swiper-slide  {
+    &[primary] {
+      background-color: color($colors, primary);
+    }
+
+    &[secondary] {
+      background-color: color($colors, secondary);
+    }
+
+    &[dark] {
+      background-color: color($colors, dark);
+    }
+
+    img {
+      margin-top: 60px;
+      width: auto;
+      max-width: 60%;
+      max-height: inherit;
+    }
+  }
+
+  .slide-content {
+    padding: 10px 40px;
+    background: color($colors, primary, base);
+  }
+
+  h2, p {
+    color: #FFF;
+  }
+
+  h2 {
+    font-weight: normal;
+    font-size: 2.4rem;
+  }
+
+  p {
+    font-size: 1.6rem;
+    text-align: justify;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: color($colors, white);
+  }
+
+  .swiper-pagination-bullet {
+    background: darken(color($colors, white), 10%);
+  }
+
+  .slide-zoom {
+    height: 100%;
+  }
+}

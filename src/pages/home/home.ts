@@ -7,6 +7,9 @@ import { LostPetsPage } from '../lost-pets/lost-pets';
 import { NewPetPage } from '../new-pet/new-pet';
 import { FilterOptionsPage } from '../filter-options/filter-options';
 import { FiltersPage } from '../filters/filters';
+import { LoginPage } from '../login/login';
+import { User } from '../../providers/user';
+import { Alert } from '../../providers/alert';
 
 
 @Component({
@@ -21,13 +24,21 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
-    public popCtrl: PopoverController
+    public popCtrl: PopoverController,
+    public userService: User,
+    public alertService: Alert
   ) {
     
   }
 
   openNewPetPage(type) { 
-    this.navCtrl.push(NewPetPage, { type });
+    if(!this.userService.currentUser()) {
+      this.alertService.showBasicAlert('Para realizar esta ação é necessário estar logado. Deseja criar uma conta?', 'Sim', () => {
+        this.navCtrl.setRoot(LoginPage, null, { animate: true });
+      }, 'não');
+    } else {
+      this.navCtrl.push(NewPetPage, { type });
+    }
   }
 
   options(event){

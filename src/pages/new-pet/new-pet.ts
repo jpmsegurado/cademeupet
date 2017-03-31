@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MapPage } from '../map/map';
@@ -45,7 +45,8 @@ export class NewPetPage {
     public fileService: File,
     public alertService: Alert,
     public foundService: FoundPet,
-    public lostService: LostPet
+    public lostService: LostPet,
+    public zone: NgZone
   ) {
     this.type = navParams.get('type');
 
@@ -152,9 +153,11 @@ export class NewPetPage {
         this.loadingLocation = true;
 
         Geocoder.geocode(req).then((res) => {
-          this.locationStr = res[0].extra.lines.join(',');
-          this.location = req.position;
-          this.loadingLocation = false;
+          this.zone.run(() => {
+            this.locationStr = res[0].extra.lines.join(',');
+            this.location = req.position;
+            this.loadingLocation = false;
+          });
         }, () => {
           this.loadingLocation = false;
           this.alertService.showBasicAlert('Não foi possível carregar o endereço, tente novamente mais tarde', 'Ok');

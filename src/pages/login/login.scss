@@ -1,3 +1,12 @@
 page-login {
+    .scroll-content {
+        background-color: color($colors, primary);
+    }
 
+    img {
+        display: block;
+        margin: 30px auto;
+        max-width: 170px;
+        max-height: 170px;
+    }
 }

@@ -6,4 +6,19 @@ page-home {
     ion-fab-list {
         right: 0px;
     }
+
+    ion-navbar {
+        img {
+            max-height: 40px;
+        }
+        
+    }
+
+    .logo {
+        background-color: color($colors, primary)
+    }
+
+    .tab-button[aria-selected = true] {
+        border-bottom: solid 2px color($colors, white);
+    }
 }

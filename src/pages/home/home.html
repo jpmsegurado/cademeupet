@@ -1,8 +1,17 @@
 <ion-header no-border >
-  <ion-navbar>
-    <ion-title>
-      Cadê meu pet?
+  <ion-navbar color="primary">
+    <ion-buttons start hideWhen="ios" left>
+      <button class="logo" color="primary">
+        <img src="assets/images/pet-branco.png">
+      </button>
+    </ion-buttons>
+    <ion-title hideWhen="ios">
+      Página inicial
     </ion-title>
+
+    <ion-title hideWhen="android">
+      Cadê meu pet?
+    </ion-title> 
 
     <ion-buttons end>
       <button ion-button icon-only (click)="options($event)"> 
@@ -15,7 +24,7 @@
  
 <ion-content>
 
-  <ion-tabs tabsPlacement="top" tabsLayout="icon-top" class="my-tabs">
+  <ion-tabs color="primary" tabsPlacement="top" tabsLayout="icon-top" class="my-tabs">
     <ion-tab [root]="tab1Root" [rootParams]="navCtrl" tabIcon="paw" tabTitle="PETS ENCONTRADOS"></ion-tab>
     <ion-tab [root]="tab2Root" [rootParams]="navCtrl" tabIcon="search" tabTitle="PETS DESAPARECIDOS"></ion-tab>
   </ion-tabs>

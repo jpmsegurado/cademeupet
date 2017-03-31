@@ -1,29 +1,16 @@
-<!--
-  Generated template for the Login page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar color="primary">
-    <ion-title>Cadê Meu Pet?</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
 <ion-content>
 
-  <form [formGroup]="form" (submit)="login(form)">
-    <ion-list>
+  <img src="assets/images/logo-with-label.png">
 
-      <ion-item>
+  <form [formGroup]="form" (submit)="login(form)">
+    <ion-list color="primary">
+
+      <ion-item color="primary">
         <ion-label>Email</ion-label>
         <ion-input formControlName="email" type="email"></ion-input>
       </ion-item>
 
-      <ion-item>
+      <ion-item color="primary">
         <ion-label>Senha</ion-label>
         <ion-input formControlName="password" type="password"></ion-input>
       </ion-item>
@@ -31,7 +18,7 @@
     </ion-list>
 
     <div padding>
-      <button ion-button full type="submit" [disabled]="loadingNormal || loadingFacebook">
+      <button color="white" ion-button full type="submit" [disabled]="loadingNormal || loadingFacebook">
         Entrar
         <ion-spinner *ngIf="loadingNormal"></ion-spinner>
       </button>
@@ -40,22 +27,23 @@
   </form>
 
   <div padding>
-    <button ion-button (click)="fb()" full [disabled]="loadingFacebook || loadingNormal">
-      Logar com Facebook
+    <button color="facebook" ion-button (click)="fb()" full [disabled]="loadingFacebook || loadingNormal" icon-left>
+      <ion-icon *ngIf="!loadingFacebook" name="logo-facebook"></ion-icon>
       <ion-spinner *ngIf="loadingFacebook"></ion-spinner>
+      Logar com Facebook
     </button>
   </div>
 
   <div padding>
     <ion-row>
       <ion-col>
-        <button ion-button full clear (click)="register()" [disabled]="loadingNormal">
+        <button color="white" [disabled]="loadingFacebook || loadingNormal" ion-button full clear (click)="register()" [disabled]="loadingNormal">
           Criar uma conta
         </button>
       </ion-col>
 
       <ion-col>
-        <button ion-button full clear (click)="pular()" [disabled]="loadingNormal">
+        <button color="white" [disabled]="loadingFacebook || loadingNormal" ion-button full clear (click)="pular()" [disabled]="loadingNormal">
           Pular Login
         </button>
       </ion-col>

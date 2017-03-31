@@ -9,9 +9,13 @@
         </ion-refresher-content>
     </ion-refresher> 
 
-    <blank-state *ngIf="loading" showSpinner="true" msg="Carregando..."></blank-state>
+    <blank-state *ngIf="loading" showSpinner="true">
+        <p>Carregando...</p>
+    </blank-state>
  
-    <blank-state *ngIf="losts.length === 0" showIcon="true" iconName="happy" msg="Não há nenhum pet desaparecido por perto."></blank-state>
+    <blank-state *ngIf="losts.length === 0" showIcon="true" iconName="happy">
+        <p>Não há nenhum pet desaparecido por perto.</p>
+    </blank-state>
 
     <ion-list>
         <ion-card *ngFor="let lost of losts" (click)="openLostPet(lost)">
