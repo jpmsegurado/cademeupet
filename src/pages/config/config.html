@@ -46,16 +46,23 @@
       </div>
     </div>
 
-    <div padding *ngIf="!user.address_string">
+    <div padding-horizontal *ngIf="!user.address_string">
       <button full ion-button (click)="loadMap()">Informar endereço</button>
       <p padding>Ao informar seu endereço, sempre que um novo pet for encontrado próximo a você, chegará uma notificação.</p>
     </div>
 
-    <div padding *ngIf="!!user">
+    <div padding-horizontal *ngIf="!!user">
       <button full ion-button (click)="openPets()">
         Ver pets que eu cadastrei
       </button>
     </div>
+
+    <div padding *ngIf="!!user">
+      <button ion-button clear color="danger" full (click)="logout()">
+        Sair
+      </button>
+    </div>
+
   </div>
 
 

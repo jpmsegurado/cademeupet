@@ -21,7 +21,8 @@
           
         <ion-card *ngFor="let found of founds" (click)="openFoundPet(found)">
             <div class="img-wrapper">
-                <img [src]="found.photo + '-/resize/300x/'"/>
+                <img *ngIf="!!found.photo" [src]="found.photo + '-/resize/300x/'"/>
+                <img *ngIf="!found.photo || found.photo.length === 0" src="assets/images/splash.png"/>
             </div>
             <ion-card-content>
                 <h2>

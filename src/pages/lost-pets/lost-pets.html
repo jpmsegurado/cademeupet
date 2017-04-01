@@ -20,7 +20,8 @@
     <ion-list>
         <ion-card *ngFor="let lost of losts" (click)="openLostPet(lost)">
         <div class="img-wrapper">
-            <img [src]="lost.photo + '-/resize/300x/'"/>
+            <img *ngIf="!!lost.photo" [src]="lost.photo + '-/resize/300x/'"/>
+                <img *ngIf="!lost.photo || lost.photo.length === 0" src="assets/images/splash.png"/>
         </div>
         <ion-card-content>
             <h2>

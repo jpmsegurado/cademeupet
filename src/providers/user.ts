@@ -60,6 +60,10 @@ export class User {
       this.startOneSignal();
     });
   }
+  
+  logout() {
+    return parse.User.logOut();
+  }
 
   signUp(email, name, password) {
     let user = new parse.User();

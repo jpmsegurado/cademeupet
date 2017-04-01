@@ -101,6 +101,12 @@ export class ConfigPage {
     }); 
   }
 
+  logout() {
+    this.userService.logout().then(() => {
+      this.navCtrl.setRoot(LoginPage, null, { animate: true });
+    });
+  }
+
   goToLogin() {
     this.navCtrl.setRoot(LoginPage, null, { animate: true });
   }
